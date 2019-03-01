@@ -7,8 +7,5 @@ Functions:
     void atlantis_sdl_deinitialize()
         Deinitialize the SDL context and free the resources
 
-    void atlantis_sdl_write_pixel(size_t x, size_t y, colour colour)
-        Write a raw pixel to the SDL context
-
-    uint32_t atlantis_create_sdl_colour(colour colour)
-        Convert a colour to a uint32_t usable by SDL as a colour
+    SDL_Renderer* atlantis_sdl_get_renderer()
+        Returns the SDL_Renderer object created by atlantis_sdl_initialize()
