@@ -1,7 +1,7 @@
 #include <Atlantis/engine/atlantis_sdl.h>
 
 SDL_Window* window = NULL;
-SDL_Surface* screen_surface = NULL;
+SDL_Renderer* renderer = NULL;
 
 void atlantis_sdl_initialize(size_t width, size_t height, std::string window_title){
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -13,23 +13,26 @@ void atlantis_sdl_initialize(size_t width, size_t height, std::string window_tit
             std::cout << __FILE__ << ":" << __LINE__ << ": SDL Failed to create window: " << SDL_GetError() << std::endl;
             return;
         } else {
-            screen_surface = SDL_GetWindowSurface(window);
+            renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+            if(renderer == NULL) {
+                std::cout << __FILE__ << ":" << __LINE__ << ": SDL Failed to create renderer: " << SDL_GetError() << std::endl;
+                return;
+            } else {
+                SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-            SDL_FillRect(screen_surface, NULL, atlantis_create_sdl_colour(colour(1,1,1,1)));
-
-            SDL_UpdateWindowSurface(window);
+            }
+ 
         }
     }
 
 }
 
-void atlantis_sdl_deinitialize(){
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+SDL_Renderer* atlantis_sdl_get_renderer(){
+    return renderer;
 }
 
-void atlantis_sdl_write_pixel(size_t x, size_t y, colour colour);
-
-uint32_t atlantis_create_sdl_colour(colour colour){
-    return SDL_MapRGBA(screen_surface->format, colour.r * 255, colour.g * 255, colour.b * 255, colour.a * 255);
+void atlantis_sdl_deinitialize(){
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
+    SDL_Quit();
 }
