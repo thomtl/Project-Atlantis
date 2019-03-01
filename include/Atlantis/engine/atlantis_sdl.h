@@ -1,8 +1,8 @@
 #ifndef ATLANTIS_SDL
 #define ATLANTIS_SDL
 
-#include <Atlantis/common.h>
-#include <Atlantis/engine/colour.h>
+#include <Atlantis/atlantis_common.h>
+#include <Atlantis/engine/atlantis_colour.h>
 
 #include <SDL2/SDL.h>
 

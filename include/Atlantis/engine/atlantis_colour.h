@@ -1,7 +1,7 @@
 #ifndef ATLANTIS_COLOUR
 #define ATLANTIS_COLOUR
 
-#include <Atlantis/common.h>
+#include <Atlantis/atlantis_common.h>
 
 class colour {
     public:
