@@ -18,7 +18,16 @@ void atlantis_sdl_initialize(size_t width, size_t height, std::string window_tit
                 std::cout << __FILE__ << ":" << __LINE__ << ": SDL Failed to create renderer: " << SDL_GetError() << std::endl;
                 return;
             } else {
-                SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                //SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                atlantis_sdl_set_draw_colour(atlantis_colour(1,1,1));
+
+                int img_flags = IMG_INIT_PNG;
+                if(!(IMG_Init(img_flags) & img_flags)){
+                    std::cout << __FILE__ << ":" << __LINE__ << ": SDL_image Failed to Initialize: " << IMG_GetError() << std::endl;
+                    return;
+                } else {
+
+                }
 
             }
  
@@ -27,12 +36,17 @@ void atlantis_sdl_initialize(size_t width, size_t height, std::string window_tit
 
 }
 
+void atlantis_sdl_set_draw_colour(atlantis_colour col){
+    SDL_SetRenderDrawColor(renderer, (col.r * 255), (col.g * 255), (col.b * 255), (col.a * 255));
+}
+
 SDL_Renderer* atlantis_sdl_get_renderer(){
     return renderer;
 }
 
 void atlantis_sdl_deinitialize(){
-    SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    IMG_Quit();    
     SDL_Quit();
 }

@@ -3,36 +3,37 @@
 
 #include <Atlantis/atlantis_common.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #define FAILURE_TEXTURE_PATH "resources/textures/Failure-to-load-texture.bmp"
 
-class texture {
+class atlantis_texture {
     public:
         SDL_Texture* tex;
 
-        texture(std::string string){
+        atlantis_texture(std::string path){
             tex = NULL;
 
-            SDL_Surface* loaded_surface = SDL_LoadBMP(string.c_str());
+            SDL_Surface* loaded_surface = IMG_Load(path.c_str());
             if(loaded_surface == NULL){
-                std::cout << __FILE__ << ":" << __LINE__ <<  ": Failed to load BMP" << std::endl;
+                std::cout << __FILE__ << ":" << __LINE__ <<  ": Failed to load texture at path: " << path << std::endl;
 
                 loaded_surface = SDL_LoadBMP(FAILURE_TEXTURE_PATH);
                 if(loaded_surface == NULL){
-                    std::cout << __FILE__ << ":" << __LINE__ <<  ": Failed to failure texture" << std::endl;
+                    std::cout << __FILE__ << ":" << __LINE__ <<  ": Failed to load failure texture" << std::endl;
                     return;
                 }
 
             } 
             tex = SDL_CreateTextureFromSurface(atlantis_sdl_get_renderer(), loaded_surface);
             if(tex == NULL){
-                std::cout << __FILE__ << ":" << __LINE__ <<  ": Failed to create Texture" << std::endl;
+                std::cout << __FILE__ << ":" << __LINE__ <<  ": Failed to create Texture from loaded_surface" << std::endl;
             }
 
             SDL_FreeSurface(loaded_surface);
         }
 
-        ~texture(){
+        ~atlantis_texture(){
             SDL_DestroyTexture(tex);
         }
 };

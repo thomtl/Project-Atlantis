@@ -5,11 +5,13 @@
 #include <Atlantis/engine/atlantis_colour.h>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 
 void atlantis_sdl_initialize(size_t width, size_t height, std::string window_title);
 void atlantis_sdl_deinitialize();
 SDL_Renderer* atlantis_sdl_get_renderer();
+void atlantis_sdl_set_draw_colour(atlantis_colour col);
 
 
 #endif
