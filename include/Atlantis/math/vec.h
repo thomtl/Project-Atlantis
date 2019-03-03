@@ -21,6 +21,12 @@ namespace math {
             vec4 operator -(vec4 b) {return vec4(this->x - b.x, this->y - b.y, this->z - b.z, this->w - b.w);}
 
             T operator *(vec4 b) {return T((this->x * b.x) + (this->y * b.y) + (this->z * b.z) + (this->w * b.w));}
+
+            std::string to_string() {
+                std::ostringstream strm;
+                strm << "[" << x << ":" << y << ":" << z << ":" << w << "]";
+                return strm.str();
+            }
     };
 
     template<typename T>
@@ -39,6 +45,12 @@ namespace math {
             vec3 operator -(vec3 b) {return vec3(this->x - b.x, this->y - b.y, this->z - b.z);}
 
             T operator *(vec3 b) {return T((this->x * b.x) + (this->y * b.y) + (this->z * b.z));}
+
+            std::string to_string() {
+                std::ostringstream strm;
+                strm << "[" << x << ":" << y << ":" << z << "]";
+                return strm.str();
+            }
     };
 
 
@@ -58,6 +70,12 @@ namespace math {
             vec2 operator -(vec2 b) {return vec2(this->x - b.x, this->y - b.y);}
 
             T operator *(vec2 b) {return T((this->x * b.x) + (this->y * b.y));}
+
+            std::string to_string() {
+                std::ostringstream strm;
+                strm << "[" << x << ":" << y << "]";
+                return strm.str();
+            }
     };
 
     typedef vec4<int> vec4i;

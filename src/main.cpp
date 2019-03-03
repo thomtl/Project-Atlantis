@@ -1,7 +1,7 @@
 #include <Atlantis/engine/atlantis_sdl.h>
 #include <Atlantis/engine/atlantis_texture.h>
-#include <Atlantis/primitives/rect.h>
 #include <Atlantis/primitives/text.h>
+#include <Atlantis/engine/atlantis_mouse.h>
 
 
 int main(){
@@ -19,8 +19,7 @@ int main(){
     
     
 
-    atlantis_text text = atlantis_text("Hello World", atlantis_colour(0,0,0,1), math::vec2i(0,0));
-
+    atlantis_mouse mouse = atlantis_mouse();
     bool quit = false;
     SDL_Event e;
 
@@ -37,12 +36,15 @@ int main(){
                         break;
                 }
             }
+
+            mouse.handle_event(&e);
         }
 
         atlantis_sdl_set_draw_colour(atlantis_colour(1,1,0));
 
         SDL_RenderClear(atlantis_sdl_get_renderer());
 
+        atlantis_text text = atlantis_text(mouse.get_position().to_string(), atlantis_colour(0,0,0,1), math::vec2i(0,0));
         
 
         //rect.draw();
