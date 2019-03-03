@@ -1,7 +1,7 @@
 CC = g++
 
 CFLAGS = -Wall -Wextra -Werror -pedantic -Iinclude/
-LINKFLAGS =  -lSDL2 -lSDL2_image
+LINKFLAGS =  -lSDL2 -lSDL2_image -lSDL2_ttf
 
 CPP_SOURCES = $(wildcard src/*.cpp src/engine/*.cpp)
 CPP_HEADERS = ${wildcard include/Atlantis/*.h include/Atlantis/engine/*.h include/Atlantis/primitives/*.h include/math/*.h}

@@ -3,6 +3,8 @@
 
 #include <Atlantis/atlantis_common.h>
 
+#include <SDL2/SDL.h>
+
 class atlantis_colour {
     public:
         double r, g, b, a;
@@ -13,6 +15,15 @@ class atlantis_colour {
         atlantis_colour operator +(atlantis_colour b) {return atlantis_colour((this->r + b.r), (this->g + b.g), (this->b + b.b), (this->a + b.a));}
         atlantis_colour operator *(atlantis_colour b) {return atlantis_colour((this->r * b.r), (this->g * b.g), (this->b * b.b), (this->a * b.a));}
         atlantis_colour operator /(atlantis_colour b) {return atlantis_colour((this->r / b.r), (this->g / b.g), (this->b / b.b), (this->a / b.a));}
+
+        SDL_Color to_sdl_color() {
+            SDL_Color ret;
+            ret.r = (r * 255);
+            ret.g = (g * 255);
+            ret.b = (b * 255);
+            ret.a = (a * 255);
+            return ret;
+        }
 };
 
 #endif
