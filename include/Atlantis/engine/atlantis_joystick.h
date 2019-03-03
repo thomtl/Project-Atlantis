@@ -20,10 +20,22 @@ class atlantis_joystick {
                 std::cout << __FILE__ << ":" << __LINE__ << ": Error: Failed to open joystick SDL_error: " << SDL_GetError() << std::endl;
                 return;
             }
+
+            joystick_haptic = SDL_HapticOpenFromJoystick(joystick);
+            if(joystick_haptic == NULL){
+                std::cout << __FILE__ << ":" << __LINE__ << ": Warning failed to open joystick haptics SDL_error: " << SDL_GetError() << std::endl;
+                return;
+            }
+
+            if(SDL_HapticRumbleInit(joystick_haptic) < 0){
+                std::cout << __FILE__ << ":" << __LINE__ << ": Warning failed to init joystick haptics SDL_error: " << SDL_GetError() << std::endl;
+                return;
+            }
         }
 
         ~atlantis_joystick(){
             if(joystick != NULL) SDL_JoystickClose(this->joystick);
+            if(joystick_haptic != NULL) SDL_HapticClose(joystick_haptic);
         }
 
         void handle_event(SDL_Event* e){
@@ -50,12 +62,17 @@ class atlantis_joystick {
             (void)(e);
         }
 
+        void play_rumble(double strenght_factor, int length){
+            if(joystick_haptic != NULL) SDL_HapticRumblePlay(joystick_haptic, strenght_factor, length);
+        }
+
         math::vec2i get_direction() {return this->direction;}
 
     private:
         math::vec2i direction;
         int sdl_joystick_index;
         SDL_Joystick* joystick;
+        SDL_Haptic* joystick_haptic;
 };
 
 #endif
