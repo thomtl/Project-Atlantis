@@ -1,6 +1,6 @@
 CC = g++
 
-CFLAGS = -Wall -Wextra -Werror -pedantic -Iinclude/
+CFLAGS = -Wall -Wextra -Werror -pedantic -Iinclude/ -std=c++17
 LINKFLAGS =  -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 CPP_SOURCES = $(wildcard src/*.cpp src/engine/*.cpp)

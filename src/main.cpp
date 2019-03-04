@@ -1,13 +1,9 @@
 #include <Atlantis/engine/atlantis_sdl.h>
-#include <Atlantis/engine/atlantis_texture.h>
-#include <Atlantis/primitives/line.h>
-#include <Atlantis/engine/atlantis_joystick.h>
 
 
 int main(){
     atlantis_sdl_initialize(800, 600, "Atlantis");
 
-    
     bool quit = false;
     SDL_Event e;
 
@@ -31,9 +27,8 @@ int main(){
 
         SDL_RenderClear(atlantis_sdl_get_renderer());
 
-
-
         SDL_RenderPresent(atlantis_sdl_get_renderer());
     }
+
     atlantis_sdl_deinitialize();
 }

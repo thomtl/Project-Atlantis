@@ -6,7 +6,7 @@ SDL_Renderer* renderer = NULL;
 TTF_Font* global_font = NULL;
 
 void atlantis_sdl_initialize(size_t width, size_t height, std::string window_title){
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC) != 0){
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC) != 0){
         std::cout << __FILE__ << ":" << __LINE__ << ": SDL Failed to initialize error: " << SDL_GetError() << std::endl;
         return;
     }
@@ -45,6 +45,11 @@ void atlantis_sdl_initialize(size_t width, size_t height, std::string window_tit
     global_font = TTF_OpenFont("resources/fonts/typed.ttf", 12);
     if(global_font == NULL){
         std::cout << __FILE__ << ":" << __LINE__ << ": SDL_ttf Failed to load font: " << TTF_GetError() << std::endl;
+        return;
+    }
+
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
+        std::cout << __FILE__ << ":" << __LINE__ << ": SDL_mixer Failed to init: " << Mix_GetError() << std::endl;
         return;
     }
 

@@ -13,6 +13,8 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <unordered_map>
 
 #define ATLANTIS_ENGINE
 
