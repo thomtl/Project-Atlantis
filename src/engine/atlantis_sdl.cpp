@@ -6,7 +6,7 @@ SDL_Renderer* renderer = NULL;
 TTF_Font* global_font = NULL;
 
 void atlantis_sdl_initialize(size_t width, size_t height, std::string window_title){
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC) != 0){
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_TIMER) != 0){
         std::cout << __FILE__ << ":" << __LINE__ << ": SDL Failed to initialize error: " << SDL_GetError() << std::endl;
         return;
     }
