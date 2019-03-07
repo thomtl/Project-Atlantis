@@ -27,11 +27,13 @@ class atlantis_timer{
 
         void pause() {paused = true;}
         void resume() {paused = false;}
+        void reset() {ticks = 0;}
 
 
         void set_callback(atlantis_timer_callback callback){
             this->callback = callback;
         }
+
 
         uint64_t ticks;
         atlantis_timer_callback callback;
